@@ -2,7 +2,7 @@ name: Check Swimming Slots
 
 on:
   schedule:
-    - cron: '0,17,36,49 * * * *'  # Runs four times an hour
+    - cron: '0,17,36,49 * 20 7 *'  # Runs four times an hour
   workflow_dispatch:
 
 jobs:

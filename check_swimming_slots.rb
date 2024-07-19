@@ -61,10 +61,10 @@ end
 
 require 'date'
 require 'time'
-tomorrow = Date.today+1
+day = Date.parse("2024-07-20")
 
 # URL of the JSON file
-url = "https://better-admin.org.uk/api/activities/venue/london-fields-lido/activity/swimmingft/times?date=#{tomorrow.to_s}"
+url = "https://better-admin.org.uk/api/activities/venue/london-fields-lido/activity/swimmingft/times?date=#{day.to_s}"
 
 # Fetch and parse JSON data
 data = fetch_json(url)
@@ -77,8 +77,8 @@ bookable_slots = find_bookable_slots(data, start_time, end_time)
 
 # Prepare and send the Telegram message if there are bookable slots
 if bookable_slots.any?
-  puts "#{bookable_slots.size} slots available on #{tomorrow.to_s} between #{start_time} and #{end_time}"
-  
+  puts "#{bookable_slots.size} slots available on #{day.to_s} between #{start_time} and #{end_time}"
+
   message = "Bookable swimming slots between #{start_time} and #{end_time}:\n"
   bookable_slots.each do |slot|
     message += "#{slot.name} from #{slot.start_time} to #{slot.end_time} at #{slot.location}, Spaces remaining: #{slot.spaces_remaining}\n"
@@ -89,5 +89,5 @@ if bookable_slots.any?
   chat_id = ENV['CHAT_ID']
   send_telegram_message(bot_token, chat_id, message)
 else
-  puts "No slots available on #{tomorrow.to_s} between #{start_time} and #{end_time}"
+  puts "No slots available on #{day.to_s} between #{start_time} and #{end_time}"
 end
