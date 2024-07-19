@@ -56,15 +56,19 @@ url = 'https://better-admin.org.uk/api/activities/venue/london-fields-lido/activ
 data = fetch_json(url)
 
 # Define the time range (example: from 6:00am to 8:00am)
-start_time = '2024-07-20 06:00'
-end_time = '2024-07-20 08:00'
+require 'date'
+require 'time'
+tomorrow = Date.today+1
+
+start_time = DateTime.new(tomorrow.year, tomorrow.month, tomorrow.day, 8, 0, 0)
+end_time = DateTime.new(tomorrow.year, tomorrow.month, tomorrow.day, 14, 0, 0)
 
 # Find bookable slots within the specified time range
 bookable_slots = find_bookable_slots(data, start_time, end_time)
 
 # Prepare and send the Telegram message if there are bookable slots
 if bookable_slots.any?
-  message = "Bookable swimming slots between #{start_time} and #{end_time}:\n"
+  message = "Bookable swimming slots between #{start_time} and #{end_time} tomorrow:\n"
   bookable_slots.each do |slot|
     message += "#{slot[:name]} from #{slot[:start_time]} to #{slot[:end_time]} at #{slot[:location]}, Spaces remaining: #{slot[:spaces_remaining]}\n"
   end
