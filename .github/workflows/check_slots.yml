@@ -11,16 +11,13 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Set up Ruby
         uses: ruby/setup-ruby@v1
         with:
-          ruby-version: '3.0'  # Specify the Ruby version you need
-
-      - name: Install dependencies
-        run: |
-          bundle install
+          ruby-version: '3.1'  # Specify the Ruby version you need
+          bundler-cache: true
 
       - name: Run check_swimming_slots.rb
         env:
