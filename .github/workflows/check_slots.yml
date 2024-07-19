@@ -20,7 +20,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          gem install telegram-bot-ruby
+          bundle install
 
       - name: Run check_swimming_slots.rb
         env:
