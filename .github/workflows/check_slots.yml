@@ -23,4 +23,4 @@ jobs:
         env:
           BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
           CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
-        run: ruby check_swimming_slots.rb
+        run: bundle exec ruby check_swimming_slots.rb
