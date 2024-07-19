@@ -18,10 +18,7 @@ def fetch_json(url)
 end
 
 # Parse the JSON data and identify bookable slots within the given time range
-def find_bookable_slots(data, start_time_str, end_time_str)
-  start_time = Time.parse(start_time_str)
-  end_time = Time.parse(end_time_str)
-  
+def find_bookable_slots(data, start_time, end_time)
   bookable_slots = []
 
   data['data'].each do |slot|
